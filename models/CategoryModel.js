@@ -4,10 +4,7 @@ const Schema = mongoose.Schema;
 
 const categorySchema = new Schema(
 {
-  name: { type: String, required: true, unique: true },
-  slug: { type: String, required: true, unique: true, lowercase: true },
-  // description: { type: String },
-  // image: { type: String },
+  name: { type: String, required: true, unique: true }
 });
 
-module.exports = mongoose.model('Category', userSchema);
+module.exports = mongoose.model('Category', categorySchema);
