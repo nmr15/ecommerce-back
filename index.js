@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 const authRouter = require('./routes/AuthRouter');
 const productRouter = require('./routes/ProductRoute');
+const categoryRouter = require('./routes/CategoryRouter');
 
 const app = express();
 app.use(express.json());
@@ -53,6 +54,7 @@ app.use('/', (req, res, next) =>
 
 app.use('/api/auth', authRouter);
 app.use('/api/products', productRouter);
+app.use('/api/categories', categoryRouter);
 
 app.listen(port, () => 
 {
