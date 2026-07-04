@@ -11,10 +11,10 @@ app.use(express.json());
 app.use(cors());
 const port = 5000
 
-// app.use(cors({
-//   origin: 'http://localhost:5173/', // Replace with your React app's URL
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-// }));
+app.use(cors({
+  origin: 'http://localhost:5173/', // Replace with your React app's URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 
 app.use((req, res, next) =>
 {
