@@ -18,14 +18,14 @@ const addConsole = async (req, res) =>
 {
   try
   {
-    const { name } = req.body;
+    const { name, shorthand } = req.body;
 
     if(!name)
     {
       return res.status(400).json({ message: "All fields are required"});
     }
 
-    const newConsole = new Console({ name });
+    const newConsole = new Console({ name, shorthand });
     await newConsole.save();
 
     res.status(201).json({ message: "Console added successfully" })
