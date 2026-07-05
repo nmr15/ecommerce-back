@@ -4,9 +4,11 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
 {
-  username: { type: String, required: true, unique: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   password: { type: String, required: true, minlength: 6 },
   email: { type: String, required: true, unique: true },
+  mobile: { type: Number, required: true, minlength: 10, maxlength: 10, unique: true },
   isAdmin: { type: Boolean, required: true, default: false },
 });
 

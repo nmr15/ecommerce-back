@@ -18,17 +18,17 @@ const getAllUsers = async (req, res) =>
 
 const registerUser = async (req, res) =>
 {
-  const { username, password, email } = req.body;
+  const { firstName, lastName, password, email, mobile, isAdmin } = req.body;
 
   try
   {
-    let user = await User.findOne({ username });
+    let user = await User.findOne({ email });
     if(user)
     {
       return res.status(400).json({ msg: 'User already exists' });
     }
 
-    user = new User({ username, password, email });
+    user = new User({ firstName, lastName, password, email, mobile, isAdmin });
 
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
@@ -52,18 +52,19 @@ const registerUser = async (req, res) =>
   catch (err)
   {
     console.log(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send(err.message);
+    
   }
 }
 
 const loginUser = async (req, res) =>
 {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try
   {
     // Check if user exists
-    let user = await User.findOne({ username });
+    let user = await User.findOne({ email });
     if(!user)
     {
       return res.status(400).json({ msg: 'Invalid credentials' });
