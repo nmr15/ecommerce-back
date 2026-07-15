@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const User = require('../models/UserModel');
+const { useReducer } = require('react');
 
 const getAllUsers = async (req, res) =>
 {
@@ -78,19 +79,32 @@ const loginUser = async (req, res) =>
     }
 
     // Generate JWT token
-    const payload =
-    {
-      user: { id: user.id }
-    }
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.jwtsecret,
+      { expiresIn: '1d' }
+    )
+    // const payload =
+    // {
+    //   user: { id: user.id }
+    // }
 
-    jwt.sign(payload, process.env.jwtsecret, { expiresIn: 3600 }),
-    (err, token) =>
-    {
-      if(err) throw err;
-      res.json({ token });
-    }
+    // jwt.sign(payload, process.env.jwtsecret, { expiresIn: 3600 }),
+    // (err, token) =>
+    // {
+    //   if(err) throw err;
+    //   res.json({ token });
+    // }
 
-    res.status(201).json({ message: 'User logged in' });
+    res.status(201).json({ 
+      token,
+      user: {
+        id: user._id,
+        fname: user.firstName,
+        lname: user.lastName,
+        role: user.role
+      }
+    });
   }
   catch(err)
   {

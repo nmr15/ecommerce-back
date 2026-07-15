@@ -9,7 +9,12 @@ const userSchema = new Schema(
   password: { type: String, required: true, minlength: 6 },
   email: { type: String, required: true, unique: true },
   mobile: { type: Number, required: true, minlength: 10, maxlength: 10, unique: true },
-  isAdmin: { type: Boolean, required: true, default: false },
+  role: {
+    type: String,
+    enum: ['customer', 'admin'],
+    default: 'customer'
+  }
+  // isAdmin: { type: Boolean, required: true, default: false },
 });
 
 module.exports = mongoose.model('User', userSchema);
