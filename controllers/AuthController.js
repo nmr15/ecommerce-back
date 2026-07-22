@@ -2,7 +2,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const User = require('../models/UserModel');
-const { useReducer } = require('react');
 
 const getAllUsers = async (req, res) =>
 {
